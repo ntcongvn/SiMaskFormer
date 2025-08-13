@@ -63,8 +63,8 @@ python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --res
 python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR $output_dir
 ```
 * $config_file: the path to the config file, polyp instance segmentation(./simaskformer/configs/polypdb_ins/instance-segmentation/simaskformer_R50_bs8.yaml).
-* $output_dir: specify the path to save the results during the evaluating process.
 * $checkpoint: path to the trained checkpoint of model.
+* $output_dir: specify the path to save the results during the evaluating process.
 
 
 ##  Usage - Polyp Semantic Segmentation
@@ -80,11 +80,11 @@ python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --res
 ####  2. Inference
 
 ```bash
-python "./simaskformer/train_net.py" --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR "$output_dir"
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR $output_dir
 ```
 * $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/polypdb_ins/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
-* $output_dir: specify the path to save the results during the evaluating process.
 * $checkpoint: path to the trained checkpoint of model.
+* $output_dir: specify the path to save the results during the evaluating process.
 
 
 ##  Usage - Skin Lesion Semantic Segmentation
@@ -94,18 +94,38 @@ python "./simaskformer/train_net.py" --config-file $config_file --num-gpus 1 --e
 ```bash
 python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --resume DATASETS.TRAIN '("isic_sem_seg_train")' DATASETS.TEST '("isic_sem_seg_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 16 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(9727,12970)" SOLVER.MAX_ITER 14592 SOLVER.CHECKPOINT_PERIOD 162 TEST.EVAL_PERIOD 162 TEST.EVAL_START_ITER 0 OUTPUT_DIR $output_dir
 ```
-* $config_file: the path to the config file, skin lesion semantic segmentation(./simaskformer/configs/isic2018/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
+* $config_file: the path to the config file, skin lesion semantic segmentation (./simaskformer/configs/isic2018/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
 * $output_dir: specify the path to save the checkpoint during the training process.
 
 ####  2. Inference
 
 ```bash
-python "./simaskformer/train_net.py" --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("isic_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR "$output_dir"
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("isic_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR $output_dir
 ```
-* $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/isic2018/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
-* $output_dir: specify the path to save the results during the evaluating process.
+* $config_file: the path to the config file, skin lesion semantic segmentation (./simaskformer/configs/isic2018/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
 * $checkpoint: path to the trained checkpoint of model.
-  
+* $output_dir: specify the path to save the results during the evaluating process.
+
+
+##  Usage - Vocal fold Semantic Segmentation
+
+####  1. Training
+
+```bash
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --resume DATASETS.TRAIN '("vofo_sem_seg_train")' DATASETS.TEST '("vofo_sem_seg_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 16 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(7800,10400)" SOLVER.MAX_ITER 13000 SOLVER.CHECKPOINT_PERIOD 65 TEST.EVAL_PERIOD 65 TEST.EVAL_START_ITER 0 OUTPUT_DIR $output_dir
+```
+* $config_file: the path to the config file, vocal fold semantic segmentation (./simaskformer/configs/vofo/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
+* $output_dir: specify the path to save the checkpoint during the training process.
+
+####  2. Inference
+
+```bash
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("vofo_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR $output_dir
+```
+* $config_file: the path to the config file, vocal fold semantic segmentation (./simaskformer/configs/vofo/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
+* $checkpoint: path to the trained checkpoint of model.
+* $output_dir: specify the path to save the results during the evaluating process.
+
 
 
 ##  Acknowledgement
