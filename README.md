@@ -72,19 +72,19 @@ python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --eva
 ####  1. Training
 
 ```bash
-!python "./simaskformer/train_net.py" --config-file "$config_file" --num-gpus 1 --resume DATASETS.TRAIN '("polypdb_ins_sem_seg_train")' DATASETS.TEST '("polypdb_ins_sem_seg_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 16 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(13210,17613)" SOLVER.MAX_ITER 19815 SOLVER.CHECKPOINT_PERIOD 220 TEST.EVAL_PERIOD 220 TEST.EVAL_START_ITER 0 OUTPUT_DIR "$output_dir"
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --resume DATASETS.TRAIN '("polypdb_ins_sem_seg_train")' DATASETS.TEST '("polypdb_ins_sem_seg_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 16 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(9907,13210)" SOLVER.MAX_ITER 14862 SOLVER.CHECKPOINT_PERIOD 165 TEST.EVAL_PERIOD 165 TEST.EVAL_START_ITER 0 OUTPUT_DIR $output_dir
 ```
-* $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/polypdb_ins/semantic-segmentation/dynaformer_R50_bs12_90ep_steplr.yaml).
+* $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/polypdb_ins/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
 * $output_dir: specify the path to save the checkpoint during the training process.
 
 ####  2. Inference
 
 ```bash
-!python "./simaskformer/train_net.py" --config-file "$config_file" --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS "$checkpoint" OUTPUT_DIR "$output_dir"
+python "./simaskformer/train_net.py" --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR "$output_dir"
 ```
-* $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/polypdb_ins/semantic-segmentation/dynaformer_R50_bs12_90ep_steplr.yaml).
+* $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/polypdb_ins/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
 * $output_dir: specify the path to save the results during the evaluating process.
-* $checkpoint: path to the trained model's checkpoint.
+* $checkpoint: path to the trained checkpoint of model.
 
 
 ##  Acknowledgement
