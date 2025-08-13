@@ -1,0 +1,86 @@
+_BASE_: Base-ISIC-SemanticSegmentation.yaml
+MODEL:
+  META_ARCHITECTURE: "SiMaskFormer"
+  SEM_SEG_HEAD:
+    NAME: "SiMaskFormerHead"
+    IGNORE_VALUE: 255
+    NUM_CLASSES: 1
+    LOSS_WEIGHT: 1.0
+    CONVS_DIM: 256
+    MASK_DIM: 256
+    NORM: "GN"
+    # pixel decoder
+    PIXEL_DECODER_NAME: "SiMaskFormerEncoder"
+    DIM_FEEDFORWARD: 1024
+    NUM_FEATURE_LEVELS: 3
+    TOTAL_NUM_FEATURE_LEVELS: 3
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+    DEFORMABLE_TRANSFORMER_ENCODER_IN_FEATURES: ["res3", "res4", "res5"]
+    COMMON_STRIDE: 4
+    TRANSFORMER_ENC_LAYERS: 6
+
+  SiMaskFormer:
+    TRANSFORMER_DECODER_NAME: "SiMaskFormerDecoder"
+    DEEP_SUPERVISION: True
+    NO_OBJECT_WEIGHT: 0.1
+    CLASS_WEIGHT: 4.0
+    MASK_WEIGHT: 5.0
+    DICE_WEIGHT: 5.0
+    HIDDEN_DIM: 256
+    NUM_OBJECT_QUERIES: 100
+    NHEADS: 8
+    DROPOUT: 0.0
+    DIM_FEEDFORWARD: 2048
+    ENC_LAYERS: 0
+    PRE_NORM: False
+    ENFORCE_INPUT_PROJ: False
+    SIZE_DIVISIBILITY: 32
+    DEC_LAYERS: 9  # 9 decoder layers, add one for the loss on learnable query
+    
+    DEC_N_POINTS: 8
+    TYPE_SAMPLING_LOCATIONS: "mask"
+    TYPE_MASK_EMBED: "SumSinusoidalMask"      
+    MASK_EMBED_SPATINAL_SHAPE_LEVEL: None    #[None,0,1,2]    None is full-size
+
+    TRAIN_NUM_POINTS: 12544
+    OVERSAMPLE_RATIO: 3.0
+    IMPORTANCE_SAMPLE_RATIO: 0.75
+    TWO_STAGE: True     #False
+    DN: "seg"
+    DN_NUM: 100
+    INITIALIZE_BOX_TYPE: "bitmask" #"no"
+    SEMANTIC_CE_LOSS: True
+    TEST:
+      SEMANTIC_ON: True
+      INSTANCE_ON: False
+      PANOPTIC_ON: False
+      OVERLAP_THRESHOLD: 0.8
+      OBJECT_MASK_THRESHOLD: 0.8
+      VISUALIZE: False
+SOLVER:
+  AMP:
+    ENABLED: False
+  BACKBONE_MULTIPLIER: 0.1
+  BASE_LR: 0.0001                                     
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 162 #325                          
+
+  IMS_PER_BATCH: 16                                   
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  STEPS: (9727,12970)                                
+  MAX_ITER: 14592                                     
+  WARMUP_FACTOR: 1.0
+  WARMUP_ITERS: 50
+  WARMUP_METHOD: linear
+
+DATALOADER:
+  NUM_WORKERS: 16                                     
+
+DATASETS:
+  TRAIN: ("isic_sem_seg_train",)                      
+  TEST: ("isic_sem_seg_val",)                         
+
+TEST:
+  EVAL_PERIOD: 162 #325                                
+  EVAL_START_ITER: 7296                              
+
