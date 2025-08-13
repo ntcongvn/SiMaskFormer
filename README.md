@@ -1,12 +1,12 @@
 # SiMaskFormer
 
-SiMaskFormer: Simultaneous Mask Linking and Adaptive Refinement for Universal Medical Image Segmentation
+**SiMaskFormer: Simultaneous Mask Linking and Adaptive Refinement for Universal Medical Image Segmentation**
 
 ##  Introduction
 
-This repository contains the PyTorch implementation of SiMaskFormer, ...
+This repository contains the PyTorch implementation of SiMaskFormer, a universal transformer-based segmentation model designed for universal medical image segmentation. SiMaskFormer integrates three key innovations to enhance accuracy and consistency across segmentation tasks. First, the **Unified Object Matching Estimation** mechanism learns to predict query-to-object alignment costs by jointly considering classification, bounding box, and mask quality, replacing conventional classification confidence used for query selection. **Adaptive Mask Refinement** module iteratively improves segmentation quality by leveraging boundary-aware positional encoding to guide attention more effectively by providing clearer positional cues for regions containing objects. Finally, **Simultaneous Mask Linking** enforces a single global query-to-object assignment shared across all decoder layers, ensuring consistent supervision for classification, box regression, and mask prediction throughout the decoding process.
 
-![model](figures/SiMaskFormer_Overview.jpg)
+<img src="figures/SiMaskFormer_Overview.jpg" alt="SiMaskFormer Overview" width="80%">
 
 ##  Install dependencies
 
