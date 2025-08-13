@@ -24,23 +24,27 @@ Install detectron2 and SiMaskFormer
 ```bask
 # Under your working directory
 # Install Detectron2
-cd ./detectron2
-!python setup.py build develop
-cd ..
+cd /detectron2
+python setup.py build develop
+
 
 #Install requirements for SiMaskFormer
-cd ./simaskformer
-!pip install -r requirements.txt
-cd ..
+cd /simaskformer
+pip install -r requirements.txt
 
-cd ./simaskformer/simaskformer/modeling/pixel_decoder/ops
-!sh make.sh
-cd ..
+cd /simaskformer/simaskformer/modeling/pixel_decoder/ops
+sh make.sh
 ```
 
-##  Polyp instance and semantic segmentation dataset (PolypDB_INS)
-In this work, Introduce PolypDB_INS, a dataset of 4,403 images with 4,918 polyps, gathered from multiple sources and annotated for Sessile and Pedunculated polyp instances, which supports the development of polyp instance segmentation tasks. Besides, PolypDB_INS is also adapted for polyp semantic segmentation by converting instance segmentation masks into binary masks. These masks identify regions containing polyps without distinguishing between specific types, enhancing the dataset’s applicability to broader segmentation tasks. The dataset is avaiable at [download link](<https://drive.google.com/file/d/1olTs9hZA4o81vfrYO32oZVuGzvTVNIQ_/view?usp=sharing>)
+##  Datasets
+SiMaskFormer is valuated on three medical imaging datasets covering both instance and semantic segmentation tasks. PolypDB_INS is a endoscopic polyp dataset designed for instance segmentation, containing diverse cases of sessile and pedunculated polyps, with corresponding binary masks enabling semantic evaluation. ISIC2018 is a public dermoscopic image benchmark for binary semantic segmentation of skin lesions, supporting rigorous assessment in melanoma detection. Seg-VoFo is a private laryngoscopic dataset for multi-class semantic segmentation of laryngeal structures and lesions, annotated into six anatomical and pathological categories. 
 
+<img src="figures/Annotated_Datasets.jpg" alt="Annotated Datasets" width="90%">
+Examples of annotations from (a) PolypDB_INS instance segmentation, (b) ISIC2018 binary lesion segmentation, and (c) Seg-VoFo multi-class segmentation including left vocal fold (blue), right vocal fold (red), left arytenoid cartilage (purple), right arytenoid cartilage (orange), benign lesion (yellow), and malignant lesion (green).
+
+- The PolypDB_INS is avaiable at [download link](<https://drive.google.com/file/d/1olTs9hZA4o81vfrYO32oZVuGzvTVNIQ_/view?usp=sharing>)
+- The ISIC2018 is avaiable at [download link](<https://challenge.isic-archive.com/data/#2018>)
+- The private Seg-VoFo dataset is used in accordance with the Declaration of Helsinki, with ethical approval granted by the Independent Ethics Committee of Cho Ray Hospital (No. 1280/GCN-HÐÐÐ, 9 March 2020)
 
 
 ##  Usage - Polyp Instance Segmentation
