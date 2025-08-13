@@ -87,6 +87,27 @@ python "./simaskformer/train_net.py" --config-file $config_file --num-gpus 1 --e
 * $checkpoint: path to the trained checkpoint of model.
 
 
+##  Usage - Skin Lesion Semantic Segmentation
+
+####  1. Training
+
+```bash
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --resume DATASETS.TRAIN '("isic_sem_seg_train")' DATASETS.TEST '("isic_sem_seg_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 16 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(9727,12970)" SOLVER.MAX_ITER 14592 SOLVER.CHECKPOINT_PERIOD 162 TEST.EVAL_PERIOD 162 TEST.EVAL_START_ITER 0 OUTPUT_DIR $output_dir
+```
+* $config_file: the path to the config file, skin lesion semantic segmentation(./simaskformer/configs/isic2018/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
+* $output_dir: specify the path to save the checkpoint during the training process.
+
+####  2. Inference
+
+```bash
+python "./simaskformer/train_net.py" --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("isic_sem_seg_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR "$output_dir"
+```
+* $config_file: the path to the config file, polyp semantic segmentation(./simaskformer/configs/isic2018/semantic-segmentation/simaskformer_R50_bs16_steplr.yaml).
+* $output_dir: specify the path to save the results during the evaluating process.
+* $checkpoint: path to the trained checkpoint of model.
+  
+
+
 ##  Acknowledgement
 
 Part of the code was adpated from [Mask DINO: Towards A Unified Transformer-based Framework for Object Detection and Segmentation](<https://github.com/IDEA-Research/MaskDINO>)
