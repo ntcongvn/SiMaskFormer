@@ -52,19 +52,19 @@ Examples of annotations from (a) PolypDB_INS instance segmentation, (b) ISIC2018
 ####  1. Training
 
 ```bash
-!python "./simaskformer/train_net.py" --config-file "$config_file" --num-gpus 1 --resume DATASETS.TRAIN '("polypdb_ins_train",)' DATASETS.TEST '("polypdb_ins_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 8 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(19800,26400)" SOLVER.MAX_ITER 29700 SOLVER.CHECKPOINT_PERIOD 330 TEST.EVAL_PERIOD 330 TEST.EVAL_START_ITER 0 OUTPUT_DIR "$output_dir"
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --resume DATASETS.TRAIN '("polypdb_ins_train",)' DATASETS.TEST '("polypdb_ins_val",)' DATALOADER.NUM_WORKERS 8  SOLVER.IMS_PER_BATCH 8 SOLVER.BASE_LR 0.0001 SOLVER.STEPS "(19815,26420)" SOLVER.MAX_ITER 29722 SOLVER.CHECKPOINT_PERIOD 330 TEST.EVAL_PERIOD 330 TEST.EVAL_START_ITER 0 OUTPUT_DIR $output_dir
 ```
-* $config_file: the path to the config file, polyp instance segmentation(./simaskformer/configs/polypdb_ins/instance-segmentation/dynaformer_R50_bs8_90ep.yaml).
-* $output_dir: specify the path to save the checkpoint during the training process.
+* $config_file: the path to the config file, polyp instance segmentation(./simaskformer/configs/polypdb_ins/instance-segmentation/simaskformer_R50_bs8.yaml).
+* $output_dir: specify the path to save the checkpoint of model during the training process.
 
 ####  2. Inference
 
 ```bash
-!python "./simaskformer/train_net.py" --config-file "$config_file" --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS "$checkpoint" OUTPUT_DIR "$output_dir"
+python ./simaskformer/train_net.py --config-file $config_file --num-gpus 1 --eval-only  DATASETS.TEST '("polypdb_ins_test",)' DATALOADER.NUM_WORKERS 1  SOLVER.IMS_PER_BATCH 1 MODEL.WEIGHTS $checkpoint OUTPUT_DIR $output_dir
 ```
-* $config_file: the path to the config file, polyp instance segmentation(./simaskformer/configs/polypdb_ins/instance-segmentation/dynaformer_R50_bs8_90ep.yaml).
+* $config_file: the path to the config file, polyp instance segmentation(./simaskformer/configs/polypdb_ins/instance-segmentation/simaskformer_R50_bs8.yaml).
 * $output_dir: specify the path to save the results during the evaluating process.
-* $checkpoint: path to the trained model's checkpoint.
+* $checkpoint: path to the trained checkpoint of model.
 
 
 ##  Usage - Polyp Semantic Segmentation
